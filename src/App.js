@@ -1,49 +1,63 @@
+/* eslint-disable no-dupe-class-members */
 // eslint-disable-next-line
-import { useEffect, useState } from "react";
+import { Component, useEffect } from "react";
 
 import "./App.css";
 import Card from "./Components/card";
 import { getUsers } from "./requests/users";
-import {getPosts} from "./requests/posts"
-import Post from "./Components/Post"
+import { getPosts } from "./requests/posts";
+import Post from "./Components/Post";
 // axios
 
-function App() {
-  const [users, setUsers] = useState([]);
-  const [postError, setPostError] = useState(null)
-  const [posts, setPosts] = useState([])
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
+    this.state = {
+      users: [],
+      posts: [],
+    };
+  }
+
+  // useEffect(()=>{},[])  === componentDidMount() // fetch()
+
+  componentDidMount() {
+    // using Axios
     getUsers()
-      .then((res) => setUsers(res))
+      .then((res) => this.setState({ users : res}))
       .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
-    getPosts()
-    .then((res)=>setPosts(res))
-    .catch((err)=>setPostError(err))
-  }, [])
+    // using fetch
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => res.json())
+      .then((res) => this.setState({posts : res}))
+      .catch((err) => console.log(err));
+  }
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-      }}
-    >
-      {users.map((user) => (
-        <Card key={user.id} user={user} />
-      ))}
-      {posts.map((post) =>(
+  render() {
+    console.log(this.state.users);
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {/* <App2 /> */}
+        {this.state.users?.map((user) => (
+          <Card key={user.id} user={user} />
+        ))}
+        {this.state.posts?.map((post) =>(
         <Post key={post.id} post={post} />
 
       ))}
-      {postError && <p>Error</p>}
-    </div>
-  );
+      {/* {postError && <p>Error</p>} */}
+      </div>
+    );
+  }
 }
 
 export default App;
+
