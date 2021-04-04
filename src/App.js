@@ -1,63 +1,41 @@
-/* eslint-disable no-dupe-class-members */
-// eslint-disable-next-line
-import { Component, useEffect } from "react";
-
 import "./App.css";
-import Card from "./Components/card";
-import { getUsers } from "./requests/users";
-import { getPosts } from "./requests/posts";
-import Post from "./Components/Post";
-// axios
+import Navbar from "./Components/Navbar/nav";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+import { Switch, Route } from "react-router-dom";
+import AboutPage from "./Pages/AboutPage";
+import UserPage from "./Pages/UserPage";
+import HomePage from "./Pages/HomePage";
+import ContactPage from "./Pages/ContactPage";
+const App = () => {
 
-    this.state = {
-      users: [],
-      posts: [],
-    };
-  }
+  // TODO: Routing
+  // TODO: React-route-dom
+  
+  // 1 - go To index.js  and add BrowserRouter
+  // 2- Nav
+  // 3- Add the Switch and Routes to the App
 
-  // useEffect(()=>{},[])  === componentDidMount() // fetch()
+  return (
+    <div>
+      <Navbar />
 
-  componentDidMount() {
-    // using Axios
-    getUsers()
-      .then((res) => this.setState({ users : res}))
-      .catch((err) => console.log(err));
-
-    // using fetch
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
-      .then((res) => this.setState({posts : res}))
-      .catch((err) => console.log(err));
-  }
-
-  render() {
-    console.log(this.state.users);
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        {/* <App2 /> */}
-        {this.state.users?.map((user) => (
-          <Card key={user.id} user={user} />
-        ))}
-        {this.state.posts?.map((post) =>(
-        <Post key={post.id} post={post} />
-
-      ))}
-      {/* {postError && <p>Error</p>} */}
-      </div>
-    );
-  }
-}
+        {/* container   --> Routes */}
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/about">
+          <AboutPage />
+        </Route>
+        <Route exact path="/users">
+          <UserPage />
+        </Route>
+        <Route exact path="/contact">
+          <ContactPage />
+        </Route>
+      </Switch>
+    </div>
+  );
+};
 
 export default App;
-
