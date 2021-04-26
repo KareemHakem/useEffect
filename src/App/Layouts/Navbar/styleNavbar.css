@@ -1,0 +1,23 @@
+.nav {
+  height: 70px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  margin: 10px 50px;
+  cursor: pointer;
+}
+.link {
+  text-decoration: none;
+  margin: 0px 30px;
+  color: rgb(53, 51, 51) !important;
+}
+.cart {
+  margin-right: 50px;
+  cursor: pointer;
+}

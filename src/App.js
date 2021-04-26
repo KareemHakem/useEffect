@@ -1,17 +1,34 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import ProductDetailPage from "./Pages/ProductDetailPage";
-import ProductsPage from "./Pages/ProductsPage";
+import { Switch, Route } from "react-router-dom";
+import Navbar from "./App/Layouts/Navbar/Navbar";
+import HomePage from "../src/App/Pages/HomePage/HomePage";
+import LoginPage from "../src/App/Pages/LoginPage/LoginPage";
+import ShopPage from "../src/App/Pages/ShopPage/ShopPage";
+import ContactPage from "../src/App/Pages/ContactPage/ContactPage";
+
+// TODO:
+// Routes / -- /contact /signIn /shop /shopDetails (hats - jackests -sneakers- women - men)
+// signIn (signIn - register - signIn with Google signIn with facebook)
+// shop (display to 4 items from Each category)
+// /  ( display to menu)
+// shopDetail Page display all Item from each Category
 
 export default function App() {
   return (
     <div>
+      <Navbar />
       <Switch>
-        <Route exact path="/products">
-          <ProductsPage />
+        <Route exact path="/">
+          <HomePage />
         </Route>
-        <Route exact path="/products/:id">
-          <ProductDetailPage />
+        <Route exact path="/shop">
+          <ShopPage />
+        </Route>
+        <Route exact path="/contact">
+          <ContactPage />
+        </Route>
+        <Route exact path="/sign">
+          <LoginPage />
         </Route>
       </Switch>
     </div>

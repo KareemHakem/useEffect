@@ -1,0 +1,21 @@
+.item_title {
+  font-size: 28px;
+  margin: 15px 30px;
+}
+.item {
+  width: 100%;
+}
+.item_img {
+  width: 100%;
+  margin: 0px 10px;
+  height: 350px;
+  object-fit: cover;
+}
+.item_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
